@@ -45,16 +45,8 @@
               <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
-                      <Component id="btnIngresar" min="-2" pref="138" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="254" max="-2" attributes="0"/>
-                      <Component id="lblAcceso" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
+              <Component id="btnIngresar" min="-2" pref="138" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -76,9 +68,7 @@
               </Group>
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Component id="btnIngresar" min="-2" pref="43" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-              <Component id="lblAcceso" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="69" max="32767" attributes="0"/>
+              <EmptySpace pref="134" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -129,11 +119,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblAcceso">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel4"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

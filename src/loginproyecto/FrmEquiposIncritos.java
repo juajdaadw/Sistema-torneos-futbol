@@ -23,16 +23,25 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
     public FrmEquiposIncritos() {
         initComponents();
         limpiar();
+        
     }
     
     public Torneo torneo = new Torneo("Torneo Septiembre 2026");
     
     public void limpiar(){
-        txtId.setText("");
         txtNombre.setText("");
         txtEntrenador.setText("");
+        txtJugadores.setText("");
     }
     
+    private boolean esNumeroEntero(String texto) {
+    try {
+        Integer.parseInt(texto);
+        return true;
+    }catch (NumberFormatException e) {
+        return false;
+        }
+    }
     
 
     /**
@@ -47,26 +56,22 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEquipos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtEntrenador = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtJugadores = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tblEquipos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Id", "Nombre equipo", "Entrenador", "Cantidad Jugadores"
+                "Nombre equipo", "Entrenador", "Cantidad Jugadores"
             }
         ));
         jScrollPane1.setViewportView(tblEquipos);
@@ -74,13 +79,9 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("INFORME DE EQUIPOS INSCRITOS");
 
-        jLabel2.setText("ID: ");
-
         jLabel3.setText("NOMBRE:");
 
         jLabel4.setText("ENTRENADOR:");
-
-        txtId.setText("jTextField1");
 
         txtNombre.setText("jTextField2");
 
@@ -89,35 +90,39 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(this::btnAgregarActionPerformed);
 
+        jLabel5.setText("JUGADORES: ");
+
+        txtJugadores.setText("jTextField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(166, 166, 166))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addGap(60, 60, 60))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(191, 191, 191)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(176, 176, 176))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(280, 280, 280)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -125,21 +130,23 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(btnAgregar)
-                .addGap(69, 69, 69)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -147,17 +154,26 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        String id = txtId.getText();
+
         String nombre = txtNombre.getText();
         String entrenador = txtEntrenador.getText();
+        String cantidadTexto = txtJugadores.getText();
         
-        if (id.isEmpty() || nombre.isEmpty() || entrenador.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.");
+        
+        
+        if (nombre.isEmpty() || entrenador.isEmpty() || cantidadTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos tienes que estar llenos");
+        }
+
+        if (!esNumeroEntero(cantidadTexto) || Integer.parseInt(cantidadTexto) < 0) {
+            JOptionPane.showMessageDialog(this, "La cantidad de jugadores debe ser un número entero valido");
             return;
+        }
         
+        int cantJugadores = Integer.parseInt(cantidadTexto);
         
-    }
-        
+        DefaultTableModel Tabla = (DefaultTableModel) tblEquipos.getModel();
+        Tabla.addRow(new Object[]{nombre, entrenador, cantJugadores});
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
@@ -188,13 +204,13 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblEquipos;
     private javax.swing.JTextField txtEntrenador;
-    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtJugadores;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

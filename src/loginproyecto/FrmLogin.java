@@ -27,7 +27,6 @@ public class FrmLogin extends javax.swing.JFrame {
     public void limpiar(){
         txtUser.setText("");
         txtPassword.setText("");
-        lblAcceso.setText("");
     }
 
     /**
@@ -45,7 +44,6 @@ public class FrmLogin extends javax.swing.JFrame {
         txtUser = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
-        lblAcceso = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,8 +65,6 @@ public class FrmLogin extends javax.swing.JFrame {
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(this::btnIngresarActionPerformed);
 
-        lblAcceso.setText("jLabel4");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,13 +85,8 @@ public class FrmLogin extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(128, 128, 128))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(206, 206, 206)
-                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(254, 254, 254)
-                        .addComponent(lblAcceso)))
+                .addGap(206, 206, 206)
+                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,9 +104,7 @@ public class FrmLogin extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(lblAcceso)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,6 +122,9 @@ public class FrmLogin extends javax.swing.JFrame {
         }
         else if (user.equals("usuario") && password.equals("123")){
             JOptionPane.showMessageDialog(null, "Acceso concedido(Usuario)");
+            FrmHome form = new FrmHome();
+            form.setVisible(true);
+            this.dispose();
         }
         else{
             JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecto");
@@ -169,7 +161,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel lblAcceso;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
