@@ -2,8 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package loginproyecto;
-
+package formularios;
+import clases.Torneo;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,8 +42,8 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,11 +59,11 @@ public class FrmLogin extends javax.swing.JFrame {
 
         txtUser.setText("jTextField1");
 
-        txtPassword.setText("jTextField2");
-
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(this::btnIngresarActionPerformed);
+
+        txtPassword.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,28 +101,30 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        // TODO add your handling code here:
         String user = txtUser.getText().toLowerCase();
         String password = txtPassword.getText();
+        boolean admin = false;
+
+        Torneo torneo = new Torneo("Torneo Futbol");
+
         if (user.equals("admin") && password.equals("admin")){
-            FrmHome form = new FrmHome();
+            admin = true;
+            FrmHome form = new FrmHome(torneo);
             form.setVisible(true);
             this.dispose();
-            
         }
         else if (user.equals("usuario") && password.equals("123")){
-            JOptionPane.showMessageDialog(null, "Acceso concedido(Usuario)");
-            FrmHome form = new FrmHome();
+            FrmHome form = new FrmHome(torneo);
             form.setVisible(true);
             this.dispose();
         }
@@ -161,7 +163,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

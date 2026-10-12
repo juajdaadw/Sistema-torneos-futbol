@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package loginproyecto;
+package clases;
 
 /**
  *
@@ -10,10 +10,10 @@ package loginproyecto;
  */
 public class Jugador {
     
-    public String id;
-    public String nombre;
-    public int edad;
-    public String posicion;
+    private String id;
+    private String nombre;
+    private int edad;
+    private String posicion;
     
     
     public Jugador(String id, String nombre, int edad, String posicion) {

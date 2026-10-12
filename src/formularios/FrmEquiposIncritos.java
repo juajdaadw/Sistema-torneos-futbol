@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package loginproyecto;
+package formularios;
 
+
+import clases.Equipos;
+import clases.Torneo;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,33 +18,42 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
     
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmEquiposIncritos.class.getName());
-
     
-    /**
-     * Creates new form FrmEquiposIncritos
-     */
+    private Torneo torneo;
+
     public FrmEquiposIncritos() {
+        this(new Torneo("Torneo Futnol"));
+    }
+
+    public FrmEquiposIncritos(Torneo torneo) {
+        this.torneo = torneo;
         initComponents();
         limpiar();
-        
+        cargarTabla();
     }
-    
-    public Torneo torneo = new Torneo("Torneo Septiembre 2026");
-    
+
     public void limpiar(){
         txtNombre.setText("");
         txtEntrenador.setText("");
         txtJugadores.setText("");
     }
-    
-    private boolean esNumeroEntero(String texto) {
-    try {
-        Integer.parseInt(texto);
-        return true;
-    }catch (NumberFormatException e) {
-        return false;
+
+    private void cargarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tblEquipos.getModel();
+        modelo.setRowCount(0);
+        for (Equipos e : torneo.getListaEquipos()) {
+            modelo.addRow(new Object[]{e.getNombre(), e.getEntrenador(), e.getCantidadJugadores()});
         }
     }
+    
+    private boolean esNumeroEntero(String texto) {
+        try {
+            Integer.parseInt(texto);
+            return true;
+        }catch (NumberFormatException e) {
+            return false;
+            }
+        }
     
 
     /**
@@ -64,7 +76,7 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtJugadores = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblEquipos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,25 +167,32 @@ public class FrmEquiposIncritos extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        String nombre = txtNombre.getText();
-        String entrenador = txtEntrenador.getText();
-        String cantidadTexto = txtJugadores.getText();
-        
-        
-        
+        String nombre = txtNombre.getText().trim();
+        String entrenador = txtEntrenador.getText().trim();
+        String cantidadTexto = txtJugadores.getText().trim();
+
         if (nombre.isEmpty() || entrenador.isEmpty() || cantidadTexto.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos tienes que estar llenos");
+            JOptionPane.showMessageDialog(this, "Todos los campos tienen que estar llenos");
+            return;
         }
 
         if (!esNumeroEntero(cantidadTexto) || Integer.parseInt(cantidadTexto) < 0) {
-            JOptionPane.showMessageDialog(this, "La cantidad de jugadores debe ser un número entero valido");
+            JOptionPane.showMessageDialog(this, "La cantidad de jugadores debe ser un número entero válido");
             return;
         }
-        
+
+        if (torneo.existeEquipo(nombre)) {
+            JOptionPane.showMessageDialog(this, "Ya existe un equipo con ese nombre");
+            return;
+        }
+
         int cantJugadores = Integer.parseInt(cantidadTexto);
-        
-        DefaultTableModel Tabla = (DefaultTableModel) tblEquipos.getModel();
-        Tabla.addRow(new Object[]{nombre, entrenador, cantJugadores});
+        String id = "E" + (torneo.getListaEquipos().size() + 1);
+        Equipos nuevo = new Equipos(id, nombre, entrenador, cantJugadores);
+        torneo.inscribirEquipo(nuevo);
+
+        cargarTabla();
+        limpiar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
