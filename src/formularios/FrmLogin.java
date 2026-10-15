@@ -4,6 +4,8 @@
  */
 package formularios;
 import clases.Torneo;
+import clases.Usuarios;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,15 +15,23 @@ import javax.swing.JOptionPane;
 public class FrmLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmLogin.class.getName());
-
-    /**
-     * Creates new form FrmLogin
-     */
+    
+    ArrayList<Usuarios> listaUsuarios;
+    String user, pass;
+    int idRol;
+    boolean confirmUser;
+    
     public FrmLogin() {
         initComponents();
         limpiar();
+        datosIniciales();
     }
     
+    public void datosIniciales(){
+        listaUsuarios = new ArrayList();
+        listaUsuarios.add(new Usuarios("ADMIN", "1234", 1));
+        listaUsuarios.add(new Usuarios("USUARIO", "5678", 2));
+    }
     
     
     public void limpiar(){
@@ -111,20 +121,27 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        String user = txtUser.getText().toLowerCase();
-        String password = txtPassword.getText();
-        boolean admin = false;
+        user = txtUser.getText().toUpperCase();
+        pass = String.valueOf(txtPassword.getPassword());
+        boolean confirmUser = false;
 
         Torneo torneo = new Torneo("Torneo Futbol");
 
-        if (user.equals("admin") && password.equals("admin")){
-            admin = true;
-            FrmHome form = new FrmHome(torneo);
-            form.setVisible(true);
-            this.dispose();
+        if(!txtUser.getText().isEmpty() && !String.valueOf(txtPassword.getPassword()).isEmpty()){
+            user = txtUser.getText().toUpperCase();
+            pass = String.valueOf(txtPassword.getPassword());
+            
+            for (Usuarios usr : listaUsuarios) {
+                if(usr.getUser().equals(user) && usr.getPass().equals(pass)){
+                    confirmUser = true;
+                    idRol = usr.getIdRole();
+                    break;
+                }
+            }
         }
-        else if (user.equals("usuario") && password.equals("123")){
-            FrmHome form = new FrmHome(torneo);
+            
+        if (confirmUser){
+            FrmHome form = new FrmHome(torneo, user, idRol);
             form.setVisible(true);
             this.dispose();
         }

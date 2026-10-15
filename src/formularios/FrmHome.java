@@ -4,6 +4,7 @@
  */
 package formularios;
 import clases.Torneo;
+import internalFrames.IFrmRegistrarEquipo;
 /**
  *
  * @author MR CHAMAN
@@ -14,14 +15,19 @@ public class FrmHome extends javax.swing.JFrame {
 
     
     private Torneo torneo;
+    private int idRol;
+    private String user;
 
-    public FrmHome() {
-        this(new Torneo("Torneo Futnol"));
-    }
 
-    public FrmHome(Torneo torneo) {
-        this.torneo = torneo;
+    public FrmHome(Torneo torneo, String user, int idRol) {
         initComponents();
+        this.torneo = torneo;
+        this.user = user;
+        this.idRol = idRol;
+        
+        if(this.idRol!=1){
+            MenuRegistrarEquipo.setEnabled(false);
+        }
     }
 
     /**
@@ -34,13 +40,10 @@ public class FrmHome extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jLabel1 = new javax.swing.JLabel();
+        TorneosFutbolDesktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         MenuRegistrarEquipo = new javax.swing.JMenuItem();
-        MenuTablaPosiciones = new javax.swing.JMenuItem();
-        MenuInfomePartidos = new javax.swing.JMenuItem();
-        MenuInformeGoleadores = new javax.swing.JMenuItem();
         MenuCerrarSesion = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
@@ -48,24 +51,22 @@ public class FrmHome extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("HOME");
+        javax.swing.GroupLayout TorneosFutbolDesktopLayout = new javax.swing.GroupLayout(TorneosFutbolDesktop);
+        TorneosFutbolDesktop.setLayout(TorneosFutbolDesktopLayout);
+        TorneosFutbolDesktopLayout.setHorizontalGroup(
+            TorneosFutbolDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 804, Short.MAX_VALUE)
+        );
+        TorneosFutbolDesktopLayout.setVerticalGroup(
+            TorneosFutbolDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 537, Short.MAX_VALUE)
+        );
 
         jMenu2.setText("Archivo");
 
         MenuRegistrarEquipo.setText("Registrar equipo");
         MenuRegistrarEquipo.addActionListener(this::MenuRegistrarEquipoActionPerformed);
         jMenu2.add(MenuRegistrarEquipo);
-
-        MenuTablaPosiciones.setText("Tabla de posiciones");
-        jMenu2.add(MenuTablaPosiciones);
-
-        MenuInfomePartidos.setText("Informe de partidos");
-        MenuInfomePartidos.addActionListener(this::MenuInfomePartidosActionPerformed);
-        jMenu2.add(MenuInfomePartidos);
-
-        MenuInformeGoleadores.setText("Informe de goleadores");
-        jMenu2.add(MenuInformeGoleadores);
 
         MenuCerrarSesion.setText("Cerrar sesion");
         MenuCerrarSesion.addActionListener(this::MenuCerrarSesionActionPerformed);
@@ -82,25 +83,15 @@ public class FrmHome extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(270, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(257, 257, 257))
+            .addComponent(TorneosFutbolDesktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(jLabel1)
-                .addContainerGap(244, Short.MAX_VALUE))
+            .addComponent(TorneosFutbolDesktop)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void MenuInfomePartidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuInfomePartidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuInfomePartidosActionPerformed
 
     private void MenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCerrarSesionActionPerformed
         FrmLogin login = new FrmLogin();
@@ -109,9 +100,10 @@ public class FrmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuCerrarSesionActionPerformed
 
     private void MenuRegistrarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRegistrarEquipoActionPerformed
-        
-        FrmEquiposIncritos form = new FrmEquiposIncritos(torneo);
-        form.setVisible(true);
+
+        IFrmRegistrarEquipo form = new IFrmRegistrarEquipo(torneo);
+        TorneosFutbolDesktop.add(form);
+        form.show();
     }//GEN-LAST:event_MenuRegistrarEquipoActionPerformed
 
     /**
@@ -136,16 +128,13 @@ public class FrmHome extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrmHome().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrmHome(null, null, 0).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuCerrarSesion;
-    private javax.swing.JMenuItem MenuInfomePartidos;
-    private javax.swing.JMenuItem MenuInformeGoleadores;
     private javax.swing.JMenuItem MenuRegistrarEquipo;
-    private javax.swing.JMenuItem MenuTablaPosiciones;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JDesktopPane TorneosFutbolDesktop;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
